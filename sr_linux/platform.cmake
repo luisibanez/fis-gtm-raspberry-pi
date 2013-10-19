@@ -9,22 +9,31 @@
 #								#
 #################################################################
 
-if("${CMAKE_SIZEOF_VOID_P}" EQUAL 4)
-  set(arch "x86")
+if("${CMAKE_SYSTEM_PROCESSOR}" STREQUAL "armv7l")
+  set(arch "arm")
   set(bits 32)
-  set(FIND_LIBRARY_USE_LIB64_PATHS FALSE)
 else()
-  set(arch "x86_64")
-  set(bits 64)
+  if("${CMAKE_SIZEOF_VOID_P}" EQUAL 4)
+    set(arch "x86")
+    set(bits 32)
+    set(FIND_LIBRARY_USE_LIB64_PATHS FALSE)
+  else()
+    set(arch "x86_64")
+    set(bits 64)
+  endif()
 endif()
 
 # Platform directories
 list(APPEND gt_src_list sr_linux)
-if(${bits} EQUAL 32)
-  list(APPEND gt_src_list sr_i386 sr_x86_regs sr_unix_nsb)
+if(${arch} STREQUAL "arm")
+  list(APPEND gt_src_list sr_arm)
 else()
-  list(APPEND gt_src_list sr_x86_64 sr_x86_regs)
-  set(gen_xfer_desc 1)
+  if(${bits} EQUAL 32)
+    list(APPEND gt_src_list sr_i386 sr_x86_regs sr_unix_nsb)
+  else()
+    list(APPEND gt_src_list sr_x86_64 sr_x86_regs)
+    set(gen_xfer_desc 1)
+  endif()
 endif()
 
 # Assembler

@@ -59,6 +59,8 @@
 #	define OBJ_PLATFORM_LABEL	0		/* CYGWIN on Windows i386 */
 #elif defined(VMS)
 #	define OBJ_PLATFORM_LABEL	0		/* Alpha/VMS */
+#elif defined(__linux__) && defined(__arm__)
+#	define  OBJ_PLATFORM_LABEL	0		/* ARM Linux */
 #else
 #error UNSUPPORTED PLATFORM
 #endif

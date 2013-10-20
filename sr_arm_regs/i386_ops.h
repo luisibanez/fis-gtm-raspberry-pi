@@ -84,7 +84,7 @@ I386_OP(AAS,_,0x3f)
 /* On x86-64, these opcodes are used as REX Prefixes.. *
  * the one byte INC and DEC instructions are not there in the 64 bit mode !!! *
  */
-#ifndef __x86_64
+#if !(defined(__x86_64) || defined(__arm__))
 I386_OP(INC,eAX,0x40)
 I386_OP(INC,eCX,0x41)
 I386_OP(INC,eDX,0x42)

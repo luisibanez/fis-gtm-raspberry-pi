@@ -27,7 +27,7 @@ IA64_ONLY(GBLREF char 		asm_mode;)
 
 /* Due to the complex instruction set of x86_64, we require a function to implement the macro VALID_CALLING_SEQUENCE
    and this function will calculate both the offsets (rtnhdr & labaddr) and store them into these global variables */
-#if defined(__x86_64__) || defined(__MVS__) || defined(Linux390)
+#if defined(__x86_64__) || defined(__MVS__) || defined(Linux390) || defined(__arm__)
 GBLDEF int4		rtnhdr_off;
 GBLDEF int4		labaddr_off;
 #endif

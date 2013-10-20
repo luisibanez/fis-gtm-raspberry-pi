@@ -104,6 +104,14 @@ NUM_64_BIT_REGISTERS
 };
 #endif /* __x86_64__ */
 
+#ifdef __arm__
+enum reg64
+{
+#include "i386_reg64.h"
+NUM_64_BIT_REGISTERS
+};
+#endif /* __x86_64__ */
+
 enum reg32
 {
 #include "i386_reg32.h"

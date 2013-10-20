@@ -26,7 +26,7 @@ endif()
 # Platform directories
 list(APPEND gt_src_list sr_linux)
 if(${arch} STREQUAL "arm")
-  list(APPEND gt_src_list sr_arm)
+  list(APPEND gt_src_list sr_arm sr_arm_regs)
 else()
   if(${bits} EQUAL 32)
     list(APPEND gt_src_list sr_i386 sr_x86_regs sr_unix_nsb)

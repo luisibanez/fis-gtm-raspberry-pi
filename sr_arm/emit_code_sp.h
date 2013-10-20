@@ -36,6 +36,14 @@ void emit_base_offset(int base, int offset);
 #define CALL_4LCLDO_XFER 2	/* index in ttt from start of call[sp] and forlcldo to xfer_table index */
 #define MAX_BRANCH_CODEGEN_SIZE 32  /* The length in bytes, of the longest form of branch instruction sequence */
 
+/*	CALL_INST_SIZE is the byte length of the minimum-length instruction sequence to implement a transfer
+ *	table call.  In the case of ARM, this is the sequence:
+ *
+ *  TODO:  See for example Raspberry Pi Assembly Language book, page 144
+ *
+ *  Temporarily we use here twice the INST_SIZE. FIXME: Must review this...
+ */
+#  define CALL_INST_SIZE (2 * INST_SIZE)
 
 int x86_64_arg_reg(int indx);
 #define GET_ARG_REG(indx)	x86_64_arg_reg(indx)

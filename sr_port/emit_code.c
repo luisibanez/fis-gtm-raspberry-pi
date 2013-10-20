@@ -836,7 +836,7 @@ short	*emit_vax_inst (short *inst, oprtype **fst_opr, oprtype **lst_opr)
 	return inst;
 }
 
-#ifndef __x86_64__ /* For x86_64, this is defined in emit_code_sp.c */
+#if !(defined(__x86_64__) || defined(__arm__)) /* For x86_64, this is defined in emit_code_sp.c */
 void	emit_jmp (uint4 branchop, short **instp, int reg)
 {
 	uint4 	branchop_opposite;
@@ -990,7 +990,7 @@ void	emit_jmp (uint4 branchop, short **instp, int reg)
 	}
 }
 
-#endif /* !__x86_64__ */
+#endif /* !__x86_64__ && !__arm__ */
 
 /* Emit code that generates a relative pc based jump target. The last instruction is not
 	complete so the caller may finish it with whatever instruction is necessary.

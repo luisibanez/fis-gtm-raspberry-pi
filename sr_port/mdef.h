@@ -246,10 +246,10 @@ typedef UINTPTR_T uintszofptr_t;
 #define NON_X86_64_ONLY(x)    x
 #endif /* __x86_64__ */
 
-#if defined(__i386) || defined(__x86_64__) || defined(__ia64) || defined(__MVS__) || defined(Linux390)
+#if defined(__i386) || defined(__x86_64__) || defined(__ia64) || defined(__MVS__) || defined(Linux390) || defined(__arm__)
 #define NON_RISC_ONLY(x)	x
 #define RISC_ONLY(x)
-#elif defined(__sparc) || defined(_AIX) || defined(__hppa) || defined(__alpha)
+#elif defined(__sparc) || defined(_AIX) || defined(__hppa) || defined(__alpha) 
 #define RISC_ONLY(x)	x
 #define NON_RISC_ONLY(x)
 #endif

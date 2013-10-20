@@ -11,7 +11,7 @@
 #ifndef GTM_COMMON_DEFS_H
 #define GTM_COMMON_DEFS_H
 
-#if defined(__ia64) || defined(__x86_64__) || defined(__sparc) || defined(__s390__) || defined (_AIX)
+#if defined(__ia64) || defined(__x86_64__) || defined(__sparc) || defined(__s390__) || defined (_AIX) || defined(__arm__)
 #  define GTM64
 #endif
 

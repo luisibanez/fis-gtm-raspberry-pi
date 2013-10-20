@@ -114,6 +114,27 @@ int dollar_quit(void)
 		} else
 			xfer_index = -1;	/* Not an xfer index */
 	}
+#	elif defined(__arm__)   /* copy / pasted from x86_64 TODO: Probably needs rewritting. */
+	{
+		ptrs.instr = sf->mpc;
+		if (0x8d49 == *ptrs.instr_type)
+		{
+			ptrs.instr += 2;	/* Past first part of instruction type */
+			if (0x7e == *ptrs.instr_type_8)
+				ptrs.instr += 2;	/* past last byte of instruction type plus 1 byte offset */
+			else if (0xbe == *ptrs.instr_type_8)
+				ptrs.instr += 5;	/* past last byte of instruction type plus 4 byte offset */
+			else
+				ptrs.instr = NULL;
+		} else
+			ptrs.instr_type = NULL;
+		if ((NULL != ptrs.instr) && (0x93FF == *ptrs.instr_type))
+		{	/* Long format CALL */
+			ptrs.instr += SIZEOF(*ptrs.instr_type);
+			xfer_index = *ptrs.xfer_offset_32 / SIZEOF(void *);
+		} else
+			xfer_index = -1;	/* Not an xfer index */
+	}
 #	elif defined(_AIX)
 	{
 		ptrs.instr = sf->mpc + 4;	/* Past address load of compiler temp arg */

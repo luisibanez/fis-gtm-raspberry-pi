@@ -9,7 +9,7 @@
 #								#
 #################################################################
 
-if("${CMAKE_SYSTEM_PROCESSOR}" STREQUAL "armv7l")
+if("${CMAKE_SYSTEM_PROCESSOR}" MATCHES "armv.l")
   set(arch "arm")
   set(bits 32)
 else()

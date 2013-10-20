@@ -390,11 +390,11 @@ add_executable(mumps			${mumps_SOURCES})
 target_link_libraries(mumps		libmumps)
 
 add_executable(dse			${dse_SOURCES})
-target_link_libraries(dse		libdse libmumps libstub)
+target_link_libraries(dse		libdse libmumps libstub libgtmshr)
 list(APPEND with_export dse)
 
 add_executable(dbcertify		${dbcertify_SOURCES})
-target_link_libraries(dbcertify		libdbcertify libmupip libmumps libstub)
+target_link_libraries(dbcertify		libdbcertify libmupip libmumps libstub libgtmshr)
 
 add_executable(geteuid			${geteuid_SOURCES})
 
@@ -402,7 +402,7 @@ add_executable(gtmsecshr		${gtmsecshr_SOURCES})
 add_dependencies(gtmsecshr		gen_gtm_threadgbl_deftypes)
 
 add_executable(gtmsecshr_real		${gtmsecshr_real_SOURCES})
-target_link_libraries(gtmsecshr_real libmumps)
+target_link_libraries(gtmsecshr_real libmumps libgtmshr)
 set_target_properties(gtmsecshr_real PROPERTIES
   OUTPUT_NAME gtmsecshr
   RUNTIME_OUTPUT_DIRECTORY ${GTM_BINARY_DIR}/gtmsecshrdir
@@ -410,31 +410,31 @@ set_target_properties(gtmsecshr_real PROPERTIES
 add_dependencies(gtmsecshr_real		gen_gtm_threadgbl_deftypes)
 
 add_executable(mupip			${mupip_SOURCES})
-target_link_libraries(mupip		libmupip libmumps libstub)
+target_link_libraries(mupip		libmupip libmumps libstub libgtmshr)
 list(APPEND with_export mupip)
 
 add_executable(lke			${lke_SOURCES})
-target_link_libraries(lke		liblke libmumps libgnpclient libmumps libgnpclient libcmisockettcp)
+target_link_libraries(lke		liblke libmumps libgnpclient libmumps libgnpclient libcmisockettcp libgtmshr)
 list(APPEND with_export lke)
 
 
 add_executable(gtcm_server		${gtcm_server_SOURCES})
-target_link_libraries(gtcm_server	libgtcm libmumps libstub)
+target_link_libraries(gtcm_server	libgtcm libmumps libstub libgtmshr)
 list(APPEND with_export gtcm_server)
 
 add_executable(gtcm_gnp_server		${gtcm_gnp_server_SOURCES})
-target_link_libraries(gtcm_gnp_server	libgnpserver liblke libmumps libcmisockettcp libstub)
+target_link_libraries(gtcm_gnp_server	libgnpserver liblke libmumps libcmisockettcp libstub libgtmshr)
 list(APPEND with_export gtcm_gnp_server)
 
 add_executable(gtcm_play		${gtcm_play_SOURCES})
-target_link_libraries(gtcm_play		libgtcm libmumps libstub)
+target_link_libraries(gtcm_play		libgtcm libmumps libstub libgtmshr)
 list(APPEND with_export gtcm_play)
 
 add_executable(gtcm_pkdisp		${gtcm_pkdisp_SOURCES})
-target_link_libraries(gtcm_pkdisp	libgtcm libmumps libstub)
+target_link_libraries(gtcm_pkdisp	libgtcm libmumps libstub libgtmshr)
 
 add_executable(gtcm_shmclean 		${gtcm_shmclean_SOURCES})
-target_link_libraries(gtcm_shmclean	libgtcm libmumps libstub)
+target_link_libraries(gtcm_shmclean	libgtcm libmumps libstub libgtmshr)
 
 add_executable(semstat2		 	${semstat2_SOURCES})
 

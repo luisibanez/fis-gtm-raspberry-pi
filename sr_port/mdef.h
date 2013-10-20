@@ -329,7 +329,7 @@ typedef struct
  *
  */
 #if defined(__alpha) || defined(_AIX) || defined(__hpux) || defined(__sparc) || defined(__MVS__) || (defined(__linux__) &&  \
-	(defined(__ia64) || defined(__x86_64__) || defined(__s390__)))
+	(defined(__ia64) || defined(__x86_64__) || defined(__s390__) || defined(__arm__) ))
 #	define HAS_LITERAL_SECT
 #endif
 

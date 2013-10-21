@@ -384,7 +384,7 @@ endforeach()
 
 # TODO: find_package or find_library for system libs?
 include_directories ("/usr/local/include")
-target_link_libraries(libmumps		${libmumpslibs})
+target_link_libraries(libmumps	elf	${libmumpslibs})
 
 add_executable(mumps			${mumps_SOURCES})
 target_link_libraries(mumps		libmumps)

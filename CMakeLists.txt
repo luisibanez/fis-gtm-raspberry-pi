@@ -410,11 +410,11 @@ set_target_properties(gtmsecshr_real PROPERTIES
 add_dependencies(gtmsecshr_real		gen_gtm_threadgbl_deftypes)
 
 add_executable(mupip			${mupip_SOURCES})
-target_link_libraries(mupip		libmupip libmumps libstub libgtmshr)
+target_link_libraries(mupip		libmupip libmumps libstub libgtmshr elf)
 list(APPEND with_export mupip)
 
 add_executable(lke			${lke_SOURCES})
-target_link_libraries(lke		liblke libmumps libgnpclient libmumps libgnpclient libcmisockettcp libgtmshr)
+target_link_libraries(lke		liblke libmumps libgnpclient libmumps libgnpclient libcmisockettcp libgtmshr elf)
 list(APPEND with_export lke)
 
 
@@ -427,7 +427,7 @@ target_link_libraries(gtcm_gnp_server	libgnpserver liblke libmumps libcmisockett
 list(APPEND with_export gtcm_gnp_server)
 
 add_executable(gtcm_play		${gtcm_play_SOURCES})
-target_link_libraries(gtcm_play		libgtcm libmumps libstub libgtmshr)
+target_link_libraries(gtcm_play		libgtcm libmumps libstub libgtmshr elf)
 list(APPEND with_export gtcm_play)
 
 add_executable(gtcm_pkdisp		${gtcm_pkdisp_SOURCES})

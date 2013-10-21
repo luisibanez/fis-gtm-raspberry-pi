@@ -9,12 +9,16 @@
  *								*
  ****************************************************************/
 
-/* for ctxt ?   #include "stack_frame.h" */
+#include "mdef.h"
+#include "error.h"
+#include "gtm_common_defs.h"
+#include "errorsp.h"
+#include "rtnhdr.h"
+#include "stack_frame.h"
 
-extern mumps_status;
-extern dollar_truth;
-extern mdb_condition_handler;
-extern ctxt;
+GBLREF int mumps_status;
+GBLREF int dollar_truth;
+GBLREF condition_handler *ctxt;
 
 int dm_start(void)
 {

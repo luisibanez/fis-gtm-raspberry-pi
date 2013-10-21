@@ -121,7 +121,9 @@ struct Rex
 static modrm_byte_type modrm_byte;
 static sib_byte_type sib_byte;
 
-GBLREF int 	call_4lcldo_variant;
+/* GBLREF int 	call_4lcldo_variant; */
+static int 	call_4lcldo_variant;
+
 GBLREF int	jmp_offset;	/* Offset to jump target */
 GBLREF char	cg_phase;	/* code generation phase */
 GBLREF char 	code_buf[];
@@ -152,7 +154,8 @@ LITDEF char	*register_list[] = {
 	"RIP"
 };
 
-GBLREF boolean_t force_32;	/* We want to generate 4 byte offets even for an offset lesser than 8bits long,
+/* GBLREF boolean_t force_32; */
+static boolean_t force_32;	/* We want to generate 4 byte offets even for an offset lesser than 8bits long,
 				   to keep things consistent between CGP_APPROX_ADDR phase and CGP_MACHINE phase */
 
 int	x86_64_arg_reg(int indx)

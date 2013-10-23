@@ -13,9 +13,9 @@
 	.fpu vfp
 	.text
 	.align	2
-	.global	call_dm
-	.type	call_dm, %function
-call_dm:
+	.global	call_dm_arm
+	.type	call_dm_arm, %function
+call_dm_arm:
 	@ args = 0, pretend = 0, frame = 0
 	@ frame_needed = 1, uses_anonymous_args = 0
 	@ link register save eliminated.
@@ -24,4 +24,4 @@ call_dm:
 	add	sp, fp, #0
 	ldmfd	sp!, {fp}
 	bx	lr
-	.size	call_dm, .-call_dm
+	.size	call_dm_arm, .-call_dm_arm

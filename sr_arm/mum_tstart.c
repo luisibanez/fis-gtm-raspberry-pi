@@ -9,15 +9,27 @@
  *								*
  ****************************************************************/
 
-int mum_tstart(void)
+#include "mdef.h"
+#include "error.h"
+#include "gtm_common_defs.h"
+
+GBLREF unsigned short proc_act_type;
+
+void mum_tstart(void)
 {
-  if(1)
-  {
-    /* getframe(); */
-    inst_flush();
-  } else
+  if(proc_act_type!=0)
   {
     trans_code();
   }
-  return 0;
+  /*
+     The assembly version here calls:
+
+                   getframe
+
+     which is a macro defined in sr_i386/g_msf.si
+
+     Must figure out the equivalent...
+
+  */
+  inst_flush();
 }

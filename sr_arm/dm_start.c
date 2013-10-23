@@ -12,7 +12,6 @@
 #include "mdef.h"
 #include "error.h"
 #include "gtm_common_defs.h"
-#include "errorsp.h"
 #include "rtnhdr.h"
 #include "stack_frame.h"
 
@@ -24,9 +23,13 @@ int dm_start(void)
 {
   mumps_status = 1;
   dollar_truth = 1;
+
   gtm_asm_establish();
+
   /* from error.si   ctxt->ch = mdb_condition_handler; */
   /* from error.si   setjmp(ctxt->jmp); */
-  restart();
+
+  restart(); /* it should point to mum_tstart(); */
+
   return 0;
 }

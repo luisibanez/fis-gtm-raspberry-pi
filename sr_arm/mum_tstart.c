@@ -12,8 +12,10 @@
 #include "mdef.h"
 #include "error.h"
 #include "gtm_common_defs.h"
+#include "xfer_enum.h"
 
 GBLREF unsigned short proc_act_type;
+GBLREF xfer_entry_t   xfer_table[];
 
 void mum_tstart(void)
 {
@@ -31,5 +33,19 @@ void mum_tstart(void)
      Must figure out the equivalent...
 
   */
-  inst_flush();
+
+  /* Load transfer table
+
+         xfer_table
+
+     this global array variable is defined in
+
+        sr_port/xfer.h
+
+     and the entries are loaded in
+
+        sr_port/xfer_table.c
+
+   */
+
 }

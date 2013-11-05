@@ -29,7 +29,7 @@ int dm_start(void)
   /* from error.si   ctxt->ch = mdb_condition_handler; */
   /* from error.si   setjmp(ctxt->jmp); */
 
-  restart(); /* it should point to mum_tstart(); */
+  restart(); /* it should point to mum_tstart(); see assignment in sr_unix/errorsp.h */
 
   return 0;
 }

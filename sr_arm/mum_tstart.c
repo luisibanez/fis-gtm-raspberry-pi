@@ -17,7 +17,7 @@
 GBLREF unsigned short proc_act_type;
 GBLREF xfer_entry_t   xfer_table[];
 
-void mum_tstart(void)
+void mum_tstart_c(void)
 {
   if(proc_act_type!=0)
   {

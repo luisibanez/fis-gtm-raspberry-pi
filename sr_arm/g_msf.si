@@ -1,0 +1,29 @@
+#################################################################
+#								#
+#	Copyright 2007, 2012 Fidelity Information Services, Inc	#
+#								#
+#	This source code contains the intellectual property	#
+#	of its copyright holder(s), and is made available	#
+#	under a license.  If you do not know the terms of	#
+#	the license, please stop and do not read further.	#
+#								#
+#################################################################
+
+	.sbttl	g_msf.si
+#	PAGE	+
+#-----------------------------------------------
+# Mumps stack frame manipulation macros
+#  for the GNU gas ARM assembler version
+#-----------------------------------------------
+
+/* Register definitions */
+
+/* Registers which we expect value to be preserved! Callee saves */
+REG_IP			.req	pc
+REG_SP			.req	sp
+
+REG_XFER_TABLE			.req	r4
+
+REG_FRAME_POINTER			.req	fp
+
+

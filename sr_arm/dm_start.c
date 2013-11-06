@@ -19,7 +19,7 @@ GBLREF int mumps_status;
 GBLREF int dollar_truth;
 GBLREF condition_handler *ctxt;
 
-int dm_start(void)
+int dm_start_c(void)
 {
   mumps_status = 1;
   dollar_truth = 1;

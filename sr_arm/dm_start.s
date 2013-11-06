@@ -36,21 +36,26 @@
 .extern	op_unwind
 
 dm_start:
-	@ args = 0, pretend = 0, frame = 0
+	@ args = 0, pretend = 0, frame = 8
 	@ frame_needed = 1, uses_anonymous_args = 0
 	@ link register save eliminated.
 	stmfd	sp!, {REG_FRAME_POINTER, lr}
 	add	REG_FRAME_POINTER, sp, #4
+	sub sp, sp, #8
 	ldr	r3, .L2  @ get address of mumps_status
 	mov	r2, #1
 	str	r2, [r3, #0]  @ set mumps_status to 1
 	ldr	r3, .L2+4     @ get address of dollar_truth
 	mov	r2, #1
 	str	r2, [r3, #0]  @ set dollar_truth to 1
-  ldr REG_XFER_TABLE, .L2+8
+	ldr REG_XFER_TABLE, .L2+8
 	ldrh	REG_XFER_TABLE, [REG_XFER_TABLE, #0]
-  bl	gtm_asm_establish
-  bl	restart
+	@ TODO: add here ESTABLISH l30 - as in x86_64
+	ldr r3, .L2+12
+	ldr r3, [r3]
+	str r3, [fp, #-8]
+	ldr r3, [fp, #-8]
+	blx	r3
 	mov	r3, #0
 	mov	r0, r3
 	ldmfd	sp!, {REG_FRAME_POINTER, pc}
@@ -60,6 +65,7 @@ dm_start:
 	.word mumps_status
 	.word dollar_truth
 	.word	xfer_table
+	.word	restart
 	.size	dm_start, .-dm_start
 
 	.align	2

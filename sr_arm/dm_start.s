@@ -10,8 +10,10 @@
 #################################################################
 
 	.title	dm_start.s
+	.sbttl	mum_tstart
 
 .include	"g_msf.si"
+.include	"error.si"
 
 	.arch armv6
 	.fpu vfp
@@ -20,8 +22,6 @@
 	.align	2
 	.global	dm_start
 	.type	dm_start, %function
-
-	.sbttl	mum_tstart
 
 	.data
 .extern	dollar_truth
@@ -39,10 +39,10 @@ dm_start:
 	@ args = 0, pretend = 0, frame = 8
 	@ frame_needed = 1, uses_anonymous_args = 0
 	@ link register save eliminated.
-	stmfd	sp!, {REG_FRAME_POINTER, lr}
+	save_callee_saved
 	add	REG_FRAME_POINTER, sp, #4
 	sub sp, sp, #8
-	ldr	r3, .L2  @ get address of mumps_status
+	ldr	r3, .L2       @ get address of mumps_status
 	mov	r2, #1
 	str	r2, [r3, #0]  @ set mumps_status to 1
 	ldr	r3, .L2+4     @ get address of dollar_truth
@@ -50,15 +50,15 @@ dm_start:
 	str	r2, [r3, #0]  @ set dollar_truth to 1
 	ldr REG_XFER_TABLE, .L2+8
 	ldrh	REG_XFER_TABLE, [REG_XFER_TABLE, #0]
-	@ TODO: add here ESTABLISH l30 - as in x86_64
-	ldr r3, .L2+12
+	ESTABLISH mdb_condition_handler, l30
+	ldr r3, .L2+12      @ get address of restart function
 	ldr r3, [r3]
 	str r3, [fp, #-8]
 	ldr r3, [fp, #-8]
-	blx	r3
+	blx	r3              @ Call restart
 	mov	r3, #0
 	mov	r0, r3
-	ldmfd	sp!, {REG_FRAME_POINTER, pc}
+	restore_callee_saved
 .L3:
 	.align 2
 .L2:

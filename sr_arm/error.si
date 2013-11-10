@@ -1,0 +1,40 @@
+#################################################################
+#								#
+#	Copyright 2001, 2012 Fidelity Information Services, Inc	#
+#								#
+#	This source code contains the intellectual property	#
+#	of its copyright holder(s), and is made available	#
+#	under a license.  If you do not know the terms of	#
+#	the license, please stop and do not read further.	#
+#								#
+#################################################################
+
+	.sbttl	error.si
+#	PAGE	+
+#-----------------------------------------------
+# Mumps error condition handler macros
+#-----------------------------------------------
+chnd_size	=	168
+chnd_save_active =	0
+chnd_ch_active	=	4
+chnd_ch		=	8
+chnd_jmp	=	12
+
+.data
+.extern	ctxt
+.extern	active_ch
+
+.text
+.extern gtm_asm_establish
+
+	.sbttl	error.si    ESTABLISH
+.macro ESTABLISH  x, label
+  blx	gtm_asm_establish		@ Bulk of ESTABLISH macro
+  @ TODO: add the rest of the condition handler code... from i386 or x86_64.
+	REVERT
+.endm
+
+	.sbttl	error.si    REVERT
+.macro REVERT
+  @ TODO: add the rest of the code... from i386 or x86_64.
+.endm

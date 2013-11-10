@@ -26,4 +26,15 @@ REG_XFER_TABLE			.req	r4
 
 REG_FRAME_POINTER			.req	fp
 
+        .sbttl  g_msf.si        save_callee_saved
+.macro save_callee_saved
+        stmfd REG_SP!, {REG_FRAME_POINTER, lr}
+        @ TODO Add here any other registers that should go in the stack
+.endm
+
+        .sbttl  g_msf.si        restore_callee_saved
+.macro restore_callee_saved
+        ldmfd REG_SP!, {REG_FRAME_POINTER, REG_IP}
+        @ TODO Add here any other registers that should be restored from the stack
+.endm
 

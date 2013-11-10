@@ -24,7 +24,21 @@ REG_SP			.req	sp
 
 REG_XFER_TABLE			.req	r4
 
-REG_FRAME_POINTER			.req	fp
+REG_FRAME_POINTER		.req	fp
+
+REG8_SCRATCH1			.req  r11
+REG_FRAME_TMP_PTR	.req  r10
+REG_PV						.req  r9
+REG_TMP						.req  r8
+
+msf_flags_off		=	70
+msf_temps_ptr_off	=	40
+msf_l_symtab_off	=	8
+msf_ctxt_off		=	24
+msf_mpc_off		=	16
+
+SFF_ETRAP_ERR		=	0x10
+
 
         .sbttl  g_msf.si        save_callee_saved
 .macro save_callee_saved
@@ -38,3 +52,30 @@ REG_FRAME_POINTER			.req	fp
         @ TODO Add here any other registers that should be restored from the stack
 .endm
 
+
+.extern	error_return
+
+	.sbttl	g_msf.si	getframe
+
+.macro getframe
+  @ Restore code from the i386 / x86_64 versions
+	ldr	REG_FRAME_POINTER, .labelfp
+	ldrh	REG_FRAME_POINTER, [REG_FRAME_POINTER, #0]
+	ldrh	REG8_SCRATCH1, [REG_FRAME_POINTER, msf_flags_off]
+	andb	$SFF_ETRAP_ERR,REG8_SCRATCH1
+	beq	lab1\@
+	blx	error_return
+	ldr	REG_FRAME_POINTER, .labelfp
+	ldrh	REG_FRAME_POINTER, [REG_FRAME_POINTER, #0]
+lab1\@:
+	ldrh	REG_FRAME_TMP_PTR, [REG_FRAME_POINTER, msf_temps_ptr_off]
+	ldrh	REG_FRAME_VAR_PTR, [REG_FRAME_POINTER, msf_l_symtab_off]
+	ldrh	REG_LITERAL_BASE, [REG_FRAME_POINTER, msf_literal_ptr_off]
+	ldrh	REG_PV, [REG_FRAME_POINTER, msf_ctxt_off]
+	ldrh	REG_TMP, [REG_FRAME_POINTER, msf_mpc_off]
+  stmfd REG_SP!, {REG_TMP}
+.labelfp:
+	.word	frame_pointer
+.endm
+
+  

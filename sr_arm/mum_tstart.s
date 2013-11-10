@@ -31,19 +31,16 @@
 .extern	trans_code
 
 mum_tstart:
-	@ args = 0, pretend = 0, frame = 0
-	@ frame_needed = 1, uses_anonymous_args = 0
-	stmfd	sp!, {REG_FRAME_POINTER, lr}
 	add	REG_FRAME_POINTER, sp, #4
 	ldr	r3, .L3
 	ldrh	r3, [r3, #0]
 	cmp	r3, #0
 	beq	.L1
-	bl	trans_code
-.L1:
-  ldr REG_XFER_TABLE, .L5
+	blx	trans_code
+.L1: getframe     @defined in g_msf.si
+  ldr REG_FRAME_POINTER, .L5
 	ldrh	REG_XFER_TABLE, [REG_XFER_TABLE, #0]
-	ldmfd	sp!, {REG_FRAME_POINTER, pc}
+  bx lr
 .L4:
 	.align	2
 .L3:
